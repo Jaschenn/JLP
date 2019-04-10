@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/diff.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:00 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>-JLP文本分析检测识别系统</title>
+    <meta name="keywords" content="文本检测识别，自然语言处理">
+    <meta name="description" content="检测文章重复率，自动生成摘要，提取关键字">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="ibox">
+                        <div class="ibox-title">目录</div>
+                        <div class="ibox-content">
+                            <div id="tree">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h3>文本对比</h3>
+                        </div>
+                        <div class="ibox-content">
+                            <button id="btn_basic" class="btn-group-justified">获取信息</button>
+
+                            <!--<div class="well">-->
+                                <!--<h3 class="m-t-lg">查重结果</h3>-->
+
+                                <!--<div class="row diff-wrapper">-->
+                                    <!--<div class="col-md-4">-->
+                                        <!--<h4>原文</h4>-->
+
+                                        <!--<div class="original" id="original_text">要对文本文件的进行比较的时候，可以考虑使用google-diff-match-patch，它可以进行比较、匹配和生成补丁的操作，这里将展示一个简单文本比较的例子。</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-4">-->
+                                        <!--<h4>对比段落</h4>-->
+
+                                        <!--<div class="changed" id="comp_text">要对文本进行比较的时候，可以考虑使用 google-diff-match-patch，它可以进行比较、匹配和生成补丁的操作，我们在这里展示一个简单的例子。首先我们必须接定好文本比较后的输出。假设我们有两段文本“123456789”和“012356889”，然后我们希望输出他们的“差异”，可是这个“差异”怎么表示呢？</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-4">-->
+                                        <!--<h4>对比结果：</h4>-->
+
+                                        <!--<div class="diff1"></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                            <h2 class="m-t-lg" id="original_title">原标题</h2>
+                            <p id="original_summary">
+                                左侧文本框内可以进行修改，实时刷新结果。
+                            </p>
+                            <div class="row diff-wrapper2">
+                                <div class="col-md-4">
+                                    <h4>原文本</h4>
+                                    <textarea class="form-control diff-textarea" id="original" rows="15">
+
+                                    </textarea>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>对比结果：</h4>
+                                    <div class="diff2"></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>百度源</h4>
+                                    <textarea class="form-control diff-textarea" id="changed" rows="15" disabled="disabled">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <div class="progress" id="progress_bar">
+                                    <div class="progress-bar progress-bar-success" role="progressbar"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 0%;" id="p1">
+                                    </div>
+                                    <div class="progress-bar progress-bar-info" role="progressbar"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 0%;" id="p2">
+                                    </div>
+                                    <div class="progress-bar progress-bar-warning" role="progressbar"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 0%;" id="p3">
+                                    </div>
+                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 0%;" id="p4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="panel">
+                                    <div id="ratePanel">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div id="original_keywords"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/plugins/diff_match_patch/diff_match_patch.js"></script>
+    <script src="js/plugins/preetyTextDiff/jquery.pretty-text-diff.min.js"></script>
+    <script src="js/plugins/treeview/bootstrap-treeview.js"></script>
+    <script src="js/plugins/echarts/echarts-all.js"></script>
+    <script>
+        function reload(){
+            $(document).ready(function(){$(".diff-wrapper").prettyTextDiff({diffContainer:".diff1"});$(".diff-wrapper2").prettyTextDiff({originalContent:$("#original").val(),changedContent:$("#changed").val(),diffContainer:".diff2"});$(".diff-textarea").on("change keyup",function(){$(".diff-wrapper2").prettyTextDiff({originalContent:$("#original").val(),changedContent:$("#changed").val(),diffContainer:".diff2"})})});
+        }
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            //加载左侧的目录
+            $.ajax({
+                url:"servlet?method=getTree",
+                success:function (result) {
+                    result = eval(result)
+                    $("#tree").treeview({data:result,state:{expanded:false},levels:0})
+                }
+            })
+            }
+        )
+
+        $("#tree").on("nodeSelected",function (event,data) {
+            $.ajax({
+                    url:"servlet?method=getDetail&&title_name="+data.text,
+                    success:function (result) {
+                            var result = eval('('+result+')')
+                            $("#original_title").html(result.title);
+                            $("#original").html(result.content);
+                            $("#changed").html(result.baidu_comp);
+                            $("#original_summary").html(result.summarg);
+                            $("#original_keywords").html(
+                                "<div class='label label-primary'>"+result.keyword+"</div>"
+                            )
+                            var similar = result.similar.split(",");
+                            var rate = similar[0];
+                            var r1 = similar[1]/4;
+                            var r2 = similar[2]/4;
+                            var r3 = similar[3]/4;
+                            var r4 = similar[4]/4;
+                            $("#p1").width(r1+"%")
+                            $("#p2").width(r2+"%")
+                            $("#p3").width(r3+"%")
+                            $("#p4").width(r4+"%")
+                            $("#ratePanel").html("<h3 class='badge-danger'>文章重复率</h3>"+rate+"%<br>"+"<h3 class='badge-success'>句子关键字重复比率</h3>"+r1+"%<br>"+"<h3 class='badge-info'>句子整体结构相似率</h3>"+r2+"%<br>"+"<h3 class='badge-warning'>句子上下文含义相似率</h3>"+r3+"%<br>"+"<h3 class='badge-primary'>句子概要相似率</h3>"+r4+"%<br>")
+                            reload();
+                    }
+            })
+        })
+    </script>
+
+
+
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/diff.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:00 GMT -->
+</html>
