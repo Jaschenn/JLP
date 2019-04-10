@@ -13,4 +13,5 @@
 * JDK 8
 * Tomcat 8.5
 ## 其他信息
-采取HanLp进行分词处理的时候使用到了模型，因为模型太大无法上传，如果需需要请到HanLp官方首页下载。
+* 采取HanLp进行分词处理的时候使用到了模型，因为模型太大无法上传，如果需需要请到HanLp官方首页下载。（置于src/resources/data中）
+* Hibernate以及log4j的配置均在src/resources/中
